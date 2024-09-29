@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Sound</title>
+    <title>Play Sound</title>
 </head>
 <body>
-    <!-- The audio element is used to play the sound in the background -->
-    <audio id="background-audio" autoplay loop>
+    <h1>Play Sound on Page Load</h1>
+    <p>This page will play a sound when loaded.</p>
+
+    <!-- The audio element for playing the sound -->
+    <audio id="audio" controls autoplay>
         <source src="DaybreakClassAEVAC.mp3" type="audio/mpeg">
-        <!-- You can add more sources for different formats if needed -->
+        <!-- Add other sources if needed (e.g., .ogg, .wav) -->
         Your browser does not support the audio element.
     </audio>
 
-    <h1>Background Sound</h1>
-    <p>This page plays a sound in the background. You can replace "sound.mp3" with your desired audio file.</p>
-
     <script>
-        // This script ensures the audio plays in the background
+        // JavaScript to ensure the sound plays when the page loads
         window.addEventListener('load', () => {
-            const audio = document.getElementById('background-audio');
-            audio.volume = 0.5; // Set the volume (0.0 to 1.0)
+            const audio = document.getElementById('audio');
+            audio.volume = 0.5; // Set the volume level (0.0 to 1.0)
             audio.play().catch(error => console.log('Error playing audio:', error));
         });
     </script>
