@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Color Theme Changer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
+        }
+        .color-input {
+            margin: 10px 0;
+        }
+        .theme-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .theme-buttons .light { background-color: #f0f0f0; color: #000; }
+        .theme-buttons .dark { background-color: #333; }
+        .theme-buttons .midnight { background-color: #000; }
+    </style>
+</head>
+<body>
+
+    <h1>Customize Your Theme</h1>
+
+    <!-- Input for custom text color -->
+    <div class="color-input">
+        <label for="textColor">Text Color (Hex): </label>
+        <input type="text" id="textColor" placeholder="#000000">
+    </div>
+
+    <!-- Input for custom background color -->
+    <div class="color-input">
+        <label for="bgColor">Background Color (Hex): </label>
+        <input type="text" id="bgColor" placeholder="#ffffff">
+    </div>
+
+    <button onclick="applyCustomColors()">Apply Custom Colors</button>
+
+    <!-- Quick theme buttons -->
+    <div class="theme-buttons">
+        <button class="light" onclick="setTheme('light')">Light Theme</button>
+        <button class="dark" onclick="setTheme('dark')">Dark Theme</button>
+        <button class="midnight" onclick="setTheme('midnight')">Midnight Theme</button>
+    </div>
+
+    <script>
+        function applyCustomColors() {
+            const textColor = document.getElementById('textColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+
+            if (isValidHex(textColor)) {
+                document.body.style.color = textColor;
+            } else {
+                alert("Please enter a valid hex color for text.");
+            }
+
+            if (isValidHex(bgColor)) {
+                document.body.style.backgroundColor = bgColor;
+            } else {
+                alert("Please enter a valid hex color for background.");
+            }
+        }
+
+        function setTheme(theme) {
+            if (theme === 'light') {
+                document.body.style.color = '#000000';
+                document.body.style.backgroundColor = '#ffffff';
+            } else if (theme === 'dark') {
+                document.body.style.color = '#ffffff';
+                document.body.style.backgroundColor = '#333333';
+            } else if (theme === 'midnight') {
+                document.body.style.color = '#ffffff';
+                document.body.style.backgroundColor = '#000000';
+            }
+        }
+
+        function isValidHex(hex) {
+            return /^#([0-9A-F]{3}){1,2}$/i.test(hex);
+        }
+    </script>
+</body>
+</html>
