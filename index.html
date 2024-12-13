@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            text-align: center;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+        <h1>Enter Username and Password</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        // SHA-256 hash function
+        async function hashInput(input) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(input);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // Precomputed hashes for username and password
+        const validUsernameHash = "5c293c8cd093f54e88f92a4892dbf9e61a12de7d5148e1108dc167d8cd92a67f"; // Hash for "[------]"
+        const validPasswordHash = "b2b567ebc091ad6f5d317b95e5cc13050e917ce90d00a2aa70fc7d7aeeec5b9a"; // Hash for "[------]"
+
+        // Handle form submission
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            const usernameHash = await hashInput(username);
+            const passwordHash = await hashInput(password);
+
+            if (usernameHash === validUsernameHash && passwordHash === validPasswordHash) {
+                // Redirect to test2.html
+                window.location.href = "test2.html";
+            } else {
+                alert("Invalid username or password.");
+            }
+        });
+    </script>
+</body>
+</html>
