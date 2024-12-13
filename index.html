@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="assets/jcjensonlogo.ico" />
+    <title>JcJenson</title>
     <style>
         body {
             background: repeating-linear-gradient(
@@ -26,8 +27,27 @@
             width: 1024px;
             height: 698px;
             background-color: #333333;
+            border: 8px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 20px;
         }
-        form {
+        .mainlogo {
+            width: 350px;
+            height: 150px;
+            /* background-color: #110000; */
+            margin-bottom: 200px;
+            margin-top: -170px; /* Adjust this value as needed */
+            float: left;
+            position: relative;
+        }
+        .footer {
+        color: #333333;
+        font-size: 12px;
+        }
+        /* form {
             text-align: center;
         }
         input {
@@ -43,7 +63,7 @@
         }
         p {
             margin: 0;
-        }
+        } */
     </style>
 </head>
 <body>
@@ -53,10 +73,17 @@
     <br>
     <p>𖥂 well played, 01 𖥂</p> -->
     <div class="main">
-    <img src="pngs/logobrightnobackground.png" width="350" height="150" />
-    <p style="color: #ffffff;">Hi and hello ETMS IT department! This is my website. I will work on updating it at a later date as I just made it. I swear nothing bad will be on this website. There will be no games (as im to dumb to make one). This website was made because of the domain name "JcJenson.org" for the JcJenson company from the show Murder Drones. Please let this website be whitelisted as I really want to show all my friends. You guys can check it as much as you want!</p>
-    <br>
-    <p style="color: #ffffff;">Credits: TechItAll</p>
+        <div class="mainlogo">
+        <img src="assets/logobrightnobackground.png" width="350" height="150" style="margin-bottom: 0px;"/>
+        </div>
+        <p style="color: #ffffff; margin-top: 10px;">Hi and hello ETMS IT department! This is my website. I will work on updating it at a later date as I just made it. I swear nothing bad will be on this website. There will be no games (as im to dumb to make one). This website was made because of the domain name "JcJenson.org" for the JcJenson company from the show Murder Drones. Please let this website be whitelisted as I really want to show all my friends. You guys can check it as much as you want!</p>
+        <br>
+        <p style="color: #ffffff;">Credits: TechItAll</p>
+    </div>
+    <div class="footer">
+        <p>Version ALPHA 0.081</p>
+        <p>I am not affiliated with Glitch Or Murder Drones</p>
+        <p>This website looks so bad T0T</p>
     </div>
 </body>
 </html>
@@ -100,7 +127,6 @@
     </style>
 </head>
 <body>
-    <!--
     <form id="loginForm">
         <h1>Enter Username and Password</h1>
         <input type="text" id="username" placeholder="Username" required>
