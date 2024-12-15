@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/jcjensonlogo.ico" />
+    <title>JcJenson</title>
+    <style>
+        body {
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.2),
+                rgba(0, 0, 0, 0.2) 10px,
+                rgba(0, 0, 0, 0.3) 10px,
+                rgba(0, 0, 0, 0.3) 20px
+                ),
+                linear-gradient(#330000, #110000);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .main {
+            width: 1024px;
+            height: 698px;
+            background-color: #333333;
+            border: 8px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .mainlogo {
+            width: 350px;
+            height: 150px;
+            /* background-color: #110000; */
+            margin-bottom: 200px;
+            margin-top: -170px; /* Adjust this value as needed */
+            float: left;
+            position: relative;
+        }
+        .footer {
+        color: #333333;
+        font-size: 12px;
+        }
+        /* form {
+            text-align: center;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        p {
+            margin: 0;
+        } */
+    </style>
+</head>
+<body>
+    <!--
+    <img src="pngs/Anonymous_emblem.svg.png" width="500" height="450" />
+    <br>
+    <br>
+    <p>𖥂 well played, 01 𖥂</p> -->
+    <div class="main">
+        <div class="mainlogo">
+        <img src="assets/logobrightnobackground.png" width="350" height="150" style="margin-bottom: 0px;"/>
+        </div>
+        <p style="color: #ffffff; margin-top: 10px;">Hi and hello ETMS IT department! This is my website. I will work on updating it at a later date as I just made it. I swear nothing bad will be on this website. There will be no games (as im to dumb to make one). This website was made because of the domain name "JcJenson.org" for the JcJenson company from the show Murder Drones. Please let this website be whitelisted as I really want to show all my friends. You guys can check it as much as you want!</p>
+        <br>
+        <p style="color: #ffffff;">Credits: TechItAll</p>
+    </div>
+    <div class="footer">
+        <p>Version ALPHA 0.081</p>
+        <p>I am not affiliated with Glitch Or Murder Drones</p>
+        <p>This website looks so bad T0T</p>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            text-align: center;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+        <h1>Enter Username and Password</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        // SHA-256 hash function
+        async function hashInput(input) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(input);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // Precomputed hashes for username and password
+        const validUsernameHash = "5c293c8cd093f54e88f92a4892dbf9e61a12de7d5148e1108dc167d8cd92a67f"; // Hash for "[------]"
+        const validPasswordHash = "b2b567ebc091ad6f5d317b95e5cc13050e917ce90d00a2aa70fc7d7aeeec5b9a"; // Hash for "[------]"
+
+        // Handle form submission
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            const usernameHash = await hashInput(username);
+            const passwordHash = await hashInput(password);
+
+            if (usernameHash === validUsernameHash && passwordHash === validPasswordHash) {
+                // Redirect to [------]
+                window.location.href = "[------]";
+            } else {
+                alert("Invalid username or password.");
+            }
+        });
+    </script>
+    <img src="pngs/Anonymous_emblem.svg.png" width="500" height="300" />
+</body>
+</html>
+
+-->
