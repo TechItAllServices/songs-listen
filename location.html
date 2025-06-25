@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send My Location to Discord</title>
+  <meta name="robots" content="noindex">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      padding: 2em;
+    }
+    button {
+      padding: 0.5em 1em;
+      margin-top: 1em;
+    }
+    #output {
+      margin-top: 1em;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Get and Send My Location</h2>
+  <p>This tool gets your current location and sends it to a Discord webhook <strong>only if you click Send</strong>.</p>
+  <button onclick="getLocation()">Get Location</button>
+  <div id="output">Location not retrieved yet.</div>
+  <button id="sendButton" style="display:none;" onclick="sendToDiscord()">Send to Webhook</button>
+
+  <script>
+    let latitude = null;
+    let longitude = null;
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+      } else {
+        document.getElementById("output").textContent = "Geolocation not supported.";
+      }
+    }
+
+    function success(position) {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+      document.getElementById("output").textContent = 
+        `Latitude: ${latitude}\nLongitude: ${longitude}`;
+      document.getElementById("sendButton").style.display = "inline-block";
+    }
+
+    function error(err) {
+      document.getElementById("output").textContent = `Error: ${err.message}`;
+    }
+
+    function sendToDiscord() {
+      if (latitude === null || longitude === null) {
+        alert("Location not ready.");
+        return;
+      }
+
+      const webhookURL = "https://discord.com/api/webhooks/1387466465128611891/5b2Ywt7dsprulBExjQ5xjWv28nJdR1BhWRgUaV4OGlGgVIHqKlTZFzLrDxHmlf5y8prA";
+      const payload = {
+        content: `📍 Location Shared:\nLatitude: ${latitude}\nLongitude: ${longitude}`
+      };
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }).then(response => {
+        if (response.ok) {
+          alert("✅ Location sent!");
+        } else {
+          alert("❌ Failed to send.");
+        }
+      }).catch(() => {
+        alert("❌ Network error.");
+      });
+    }
+  </script>
+
+</body>
+</html>
