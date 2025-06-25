@@ -41,8 +41,8 @@
     }
 
     function success(position) {
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
+      latitude = position.coords.latitude.toFixed(8);
+      longitude = position.coords.longitude.toFixed(8);
       document.getElementById("output").textContent = 
         `Latitude: ${latitude}\nLongitude: ${longitude}`;
       document.getElementById("sendButton").style.display = "inline-block";
