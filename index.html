@@ -1,89 +1,181 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="assets/jcjensonlogo.ico" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">  
+    <link rel="icon" type="image/x-icon" href="assets/jcjensonlogo.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <title>JcJenson</title>
     <style>
+        @font-face {
+            font-family: 'HomeVideo';
+            src: url('fonts/HomeVideo-BLG6G.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(0, 0, 0, 0.2),
-                rgba(0, 0, 0, 0.2) 10px,
-                rgba(0, 0, 0, 0.3) 10px,
-                rgba(0, 0, 0, 0.3) 20px
-            ),
-            linear-gradient(#ff0000, #110000);
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0, 0, 0, 0.2),
+                    rgba(0, 0, 0, 0.2) 10px,
+                    rgba(0, 0, 0, 0.3) 10px,
+                    rgba(0, 0, 0, 0.3) 20px
+                ),
+                linear-gradient(#ff0000, #110000);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
+            padding: 20px 0;
         }
+
         .main {
-            width: 1024px;
-            height: 698px;
+            width: min(1024px, 90vw);
+            height: auto;
+            min-height: 698px;
             background-color: #333333;
             border: 8px solid black;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            padding: 40px 20px;
+            margin-bottom: 80px;
+        }
+
+        .mainlogo {
+            margin-bottom: 30px;
+        }
+
+        .mainlogo img {
+            width: 390px;
+            height: 150px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .font-homevideo {
+            font-family: 'HomeVideo', sans-serif;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #000000;
+            text-align: center;
             margin-bottom: 20px;
         }
-        /* Define the font using @font-face */
-        @font-face {
-            font-family: 'HomeVideo'; /* Name the font family */
-            src: url('fonts/HomeVideo-BLG6G.ttf') format('truetype'); /* Link to the font file */
-            font-weight: normal;
-            font-style: normal;
-        }
 
-        /* Apply the HomeVideo font to a specific paragraph */
-        .font-homevideo {
-            font-family: 'HomeVideo', sans-serif; /* Use the custom font */
-            font-size: 1.5em;
-        }
-
-        /*
-        .mainlogo {
-            width: 350px;
-            height: 150px;
-            margin-bottom: 200px;
-            margin-top: -170px;
-            position: relative;
-        }
-        .footer {
-            color: #333333;
-            font-size: 12px;
-            text-align: center;
-        }
         p {
+            color: #000000;
+            text-align: center;
+            margin: 10px;
+            line-height: 1.6;
+        }
+
+        .links {
+            color: #0800ee;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .links a {
+            color: #0800ee;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .links a:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(51, 51, 51, 0.95);
             color: #ffffff;
             text-align: center;
-            margin: 10px 0;
-        } */
+            padding: 10px;
+            font-size: 11px;
+            border-top: 1px solid #666;
+            backdrop-filter: blur(5px);
+        }
+
+        footer p {
+            margin: 0;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                width: 95vw;
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .mainlogo img {
+                width: 280px;
+                height: auto;
+            }
+        }
     </style>
 </head>
-<!-- BUT ITS STILL HERE, ISNT IT? -->
 <body>
     <div class="main">
         <div class="mainlogo">
-            <img src="assets/logobrightnobackground.png" width="390" height="150" alt="JcJenson Logo" />
+            <img src="assets/logobrightnobackground.png" alt="JcJenson Logo">
         </div>
-        <h1 class="font-homevideo" style="font-size: 40px;">Welcome to the Index of JcJenson.org!</h1>
-        <!-- <p style="margin-left: 10px; margin-right: 10px;">Welcome to <i>JCJenson.org</i>, my kinda dumb website for all things Murder Drones. If you're into that retro, early internet vibe that screams 2000s, then this place might just be your jam. The show may have wrapped up with episode 8, and while I know we're probably never getting more, I had an absolute blast with it. Until then, this is where I’ll be nerding out over everything related to the series and a bunch of other random stuff.</p> -->
-        <p style="margin-left: 10px; margin-right: 10px;">Welcome to <i>JCJenson.org</i>, my website that for some reason decided to spend money on. I may or may not add more later. But at least I can say that I own JcJenson, maybe. Anyways hope you found this funny and have a good rest of your day!</p>
-        <!-- <p>index.html is the main page for the JcJenson website.</p>
-        <p>It is currently under construction.</p>
-        <p>Check back soon for updates!</p>
-        <p class="font-homevideo">This paragraph uses the HOMEVIDEO font.</p> -->
-        <h2 class="font-homevideo" style="font-size: 30px;">Links</h2>
-        <div style="color: #0800ee;">
-            <a href="https://youtube.com/playlist?list=PLHovnlOusNLiJz3sm0d5i2Evwa2LDLdrg&si=3de0qdqiNXDIYC_B" style="color: #0800ee;">Watch Murder Drones Here</a> <!--ETMSSchoolInfo.html-->
-            <a href="creditsandinfo.html" style="color: #0800ee;">Credits and Information</a>
+        
+        <h1 class="font-homevideo">Welcome to the Index of JcJenson.org!</h1>
+        
+        <p>
+            Welcome to <em>JCJenson.org</em>, my website that for some reason decided to spend money on. 
+            I may or may not add more later. But at least I can say that I own JcJenson, maybe. 
+            Anyways hope you found this funny and have a good rest of your day!
+        </p>
+        
+        <h2 class="font-homevideo">Links</h2>
+        
+        <div class="links">
+            <a href="https://youtube.com/playlist?list=PLHovnlOusNLiJz3sm0d5i2Evwa2LDLdrg&si=3de0qdqiNXDIYC_B">
+                Watch Murder Drones Here
+            </a>
+            <a href="creditsandinfo.html">
+                Credits and Information
+            </a>
         </div>
     </div>
+
+    <footer>
+        <p>By viewing this page, you hereby agree to transfer all legal rights, claims, and interests to JcJenson Corporation. This agreement is binding and irrevocable upon page load.</p>
+    </footer>
+</body>
+</html>
