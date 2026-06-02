@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angry Note Render</title>
+  <style>
+    @font-face {
+      font-family: "OmoriFont";
+      src: url("OMORI_GAME.ttf") format("truetype");
+    }
+
+    :root {
+      --bg: #000;
+      --fg: #f5f5f5;
+      --red: #ff4b4b;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, sans-serif;
+      padding: 22px;
+      line-height: 1.5;
+    }
+
+    .line {
+      margin: 0 0 8px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .omori {
+      font-family: "OmoriFont", monospace;
+      font-size: 1.08em;
+    }
+
+    .red {
+      color: var(--red);
+    }
+
+    details.reveal {
+      margin: 10px 0 12px;
+      padding: 0;
+    }
+
+    details.reveal.locked {
+      display: none;
+    }
+
+    details.reveal > summary {
+      cursor: pointer;
+      color: #d3d3d3;
+      user-select: none;
+      outline: none;
+      font-family: Consolas, monospace;
+      margin-bottom: 8px;
+    }
+
+    details.reveal[open] > summary {
+      color: #fff;
+    }
+
+    .final-trigger.locked {
+      display: none;
+    }
+
+    .final-trigger {
+      margin: 10px 0 12px;
+    }
+
+    .final-button {
+      border: none;
+      background: transparent;
+      color: #d3d3d3;
+      padding: 0;
+      font: inherit;
+      font-family: Consolas, monospace;
+      cursor: pointer;
+    }
+
+    .final-button:hover {
+      color: #fff;
+    }
+
+    .final-screen {
+      min-height: calc(100vh - 44px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .final-message {
+      margin: 0;
+      color: #fff;
+      font-family: "OmoriFont", monospace;
+      font-size: 2rem;
+      line-height: 1.2;
+      white-space: pre-wrap;
+    }
+
+    .mc-obfuscated {
+      display: inline-block;
+      min-width: 0.4ch;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .shake-char {
+      display: inline-block;
+      animation-name: shake;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .shake-slow,
+    .shake-med,
+    .shake-fast {
+      display: inline-block;
+      animation-name: shake;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .shake-slow {
+      --shake-intensity: 1.5px;
+      animation-duration: 0.22s;
+    }
+
+    .shake-med {
+      --shake-intensity: 2px;
+      animation-duration: 0.13s;
+    }
+
+    .shake-fast {
+      --shake-intensity: 2.4px;
+      animation-duration: 0.08s;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0px, 0px); }
+      25% { transform: translate(var(--shake-intensity), calc(var(--shake-intensity) * -1)); }
+      50% { transform: translate(calc(var(--shake-intensity) * -1), var(--shake-intensity)); }
+      75% { transform: translate(var(--shake-intensity), var(--shake-intensity)); }
+      100% { transform: translate(calc(var(--shake-intensity) * -1), calc(var(--shake-intensity) * -1)); }
+    }
+  </style>
+</head>
+<body>
+  <div id="note">
+    <p class="line">I don't even know where to start. What is life? That sounds like something most people start with. Or a better question... why? Why is life? Why does life</p>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line"><span class="omori shake-med">SUCK</span></p>
+      <p class="line">I mean, come on, it feels like there's always something happening. What do we classify as good? What do we classify as bad? Why do we get so worked up over things?</p>
+      <p class="line">I <span class="shake-fast">HATE</span> having emotions. They're so stupid; they aren't valid. I get that people say that your emotions are valid because that is what, as a society, we've made up...</p>
+      <p class="line">....</p>
+      <p class="line">Honestly, I don't know why I'm writing this... I had an idea in the morning, but it's been hours.</p>
+      <p class="line">...</p>
+      <p class="line">Sometimes... I just wish I never met</p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line"><span class="omori shake-fast">YOU</span></p>
+      <p class="line"><span class="omori">Why did I let things get the way they did? Why did I want to be your friend? Why was I so blind that I stayed? Why didn't I listen to everyone else around me?</span></p>
+      <p class="line">I tell myself this is because I wanted to help and I just wanted the best for them, but I can't even say that anymore... I don't believe that is the reason anymore. It wouldn't make sense.</p>
+      <p class="line">I'm not a good person, and I'm probably saying this for attention too, but I know I'm not a good person.</p>
+      <p class="line">It's because I was selfish. I stayed because I was selfish. Someone who would finally listen to me and I actually felt comfortable around, something I never had happen before.</p>
+      <p class="line">I was blind because I was selfish. I wanted what I wanted, and I didn't care about anyone else.</p>
+      <p class="line">I let myself get so bad.</p>
+      <p class="line">So, so so so so <span class="omori">so so so so so so so</span> <span class="shake-fast">so</span></p>
+      <p class="line"><span class="omori">bad</span></p>
+      <p class="line">I wish I never met you. I wish I never met anyone from the start. Even if we are friends, you know everything that happened. Nobody was mad at me, but you know what happened; you know what I'm talking about.</p>
+      <p class="line">But we all had it covered, we could deal with it. Yes, it was an issue, but things only got bad when <span class="red">you</span> joined in.</p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line">I've never <span class="mc-obfuscated red" data-length="3">cut</span>, until you made me. I never <span class="mc-obfuscated red" data-length="9">xxxx xxxxx</span>, until you made me.</p>
+      <p class="line">But I shouldn't even blame you; it's my fault. It's my fault I listened, it's my fault I stayed.</p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line">And now you're gone. It hurt so bad when you first left. But you didn't leave, I did... <span class="omori shake-slow">so why does it still hurt me.</span></p>
+      <p class="line">I just want you out of my life. For the most part you are, but the people that you are connected to</p>
+      <p class="line"><span class="shake-slow">still <span class="red">haunt</span> me...</span></p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line">And now I'm a mess, and I don't want to affect my new friends, but I've changed. I'm not the same anymore, and I think I am.</p>
+
+      <details class="reveal">
+        <summary>How does one forget the past?</summary>
+        <p class="line"><span class="omori">How do I forget my past? I want to forget my past. I hate it.</span> <span class="shake-fast">I want to forget it, I want to forget it, I want to forget it.</span></p>
+        <p class="line">I can't get over the hospital or the <span class="mc-obfuscated" data-length="7">cutting</span> or ANYTHING.</p>
+        <p class="line">I want to go back in time to when I met <span class="mc-obfuscated" data-length="5">Tyler</span>, tell him I didn't want to go online. If I said that, I would have never met <span class="mc-obfuscated" data-length="6">Parker</span></p>
+        <p class="line">Never met Random...</p>
+        <p class="line">and that would suck, they are my friends</p>
+        <p class="line">but at least I wouldn't have met</p>
+        <p class="line"><span class="red">YOU</span></p>
+      </details>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line"><span class="omori">And now I've devolved into this person that messages my friends every few hours, making sure they are okay because I can't change the way I think.</span></p>
+      <p class="line">I can't believe people like me anymore. I can't believe that they like talking to me. So do I ask if they are okay because I care about them? I thought so.</p>
+      <p class="line">But that's what good people do.</p>
+      <p class="line"><span class="shake-slow">I'm not one of those</span></p>
+      <p class="line">I'm a bad person, I probably only do it because I'm selfish and just want to make sure they don't hate ME.</p>
+      <p class="line"><span class="shake-fast">ME ME ME ME ME ME ME</span> that's all I talk about.</p>
+      <p class="line">And now I have to be weirding them out. I get worried if they don't respond for a day, probably even less than a day; that's how selfish I am.</p>
+      <p class="line">I get and think they have their own life, so why do I act like they don't? Do I act like they don't? I DON'T KNOW ANYMORE!</p>
+      <p class="line">I can't even have friends without overthinking 24/7! It's constant, even when the slightest thing changes or goes wrong. Even if things are normal.</p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <details class="reveal">
+        <summary>...</summary>
+        <p class="line">Car, Rainy, Pugs, and Dingus. You guys all seem like super cool people, I love you guys. You guys are really nice friends, and I'm glad that I'm your friend... if I am. I'm sorry I'm so weird, I'm sorry I don't talk, I'm sorry that I message so much. I'm just sorry I'm not a good friend.</p>
+        <p class="line">And Toast, I know I just met you, but you seem really cool too and I'm glad to be friends with you.</p>
+      </details>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line">But I don't think I'm doing good at life.</p>
+      <p class="line">How am I smart? How do I get grades when I'm so</p>
+      <p class="line"><span class="omori red shake-slow">stupid</span></p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line">Maybe this time I actually need to <span class="mc-obfuscated" data-length="12">xxxx myself</span> this time.</p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line">I think...</p>
+      <p class="line">this time</p>
+    </details>
+
+    <details class="reveal">
+      <summary>...</summary>
+      <p class="line"><span class="omori shake-slow">I really need to <span class="mc-obfuscated red" data-length="7">fucking</span> <span class="mc-obfuscated" data-length="4">xxxx</span> myself</span></p>
+    </details>
+
+    <div id="finalTrigger" class="final-trigger locked">
+      <button id="finalButton" class="final-button" type="button">...</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+      document.querySelectorAll(".mc-obfuscated").forEach((element) => {
+        const length = parseInt(element.getAttribute("data-length"), 10) || element.textContent.length;
+        setInterval(() => {
+          let randomText = "";
+          for (let i = 0; i < length; i += 1) {
+            randomText += chars.charAt(Math.floor(Math.random() * chars.length));
+          }
+          element.textContent = randomText;
+        }, 50);
+      });
+
+      function buildShakyMessage(text) {
+        const fragment = document.createDocumentFragment();
+        for (const ch of text) {
+          if (ch === " ") {
+            fragment.appendChild(document.createTextNode(" "));
+            continue;
+          }
+
+          const span = document.createElement("span");
+          span.className = "shake-char";
+          span.style.setProperty("--shake-intensity", "2px");
+          span.style.animationDuration = (0.09 + Math.random() * 0.15).toFixed(2) + "s";
+          span.style.animationDelay = (Math.random() * 0.4).toFixed(2) + "s";
+          span.textContent = ch;
+          fragment.appendChild(span);
+        }
+        return fragment;
+      }
+
+      function showFinalScreen(note) {
+        note.innerHTML = "";
+        const screen = document.createElement("div");
+        screen.className = "final-screen";
+
+        const message = document.createElement("p");
+        message.className = "final-message";
+        message.appendChild(buildShakyMessage("I'm sorry."));
+
+        screen.appendChild(message);
+        note.appendChild(screen);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Unlock top-level reveal sections in strict order.
+      const note = document.getElementById("note");
+      const finalTrigger = document.getElementById("finalTrigger");
+      const finalButton = document.getElementById("finalButton");
+      const reveals = Array.from(note.querySelectorAll(":scope > details.reveal"));
+      reveals.forEach((details, index) => {
+        if (index > 0) {
+          details.classList.add("locked");
+        }
+
+        details.addEventListener("toggle", () => {
+          if (!details.open) {
+            return;
+          }
+
+          const next = reveals[index + 1];
+          if (next) {
+            next.classList.remove("locked");
+          }
+
+          const isSecondLast = index === reveals.length - 1;
+          if (!isSecondLast) {
+            return;
+          }
+
+          // Keep only this block, then unlock the non-dropdown final step.
+          Array.from(note.children).forEach((child) => {
+            if (child !== details && child !== finalTrigger) {
+              child.remove();
+            }
+          });
+          note.prepend(details);
+          finalTrigger.classList.remove("locked");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      finalButton.addEventListener("click", () => {
+        showFinalScreen(note);
+      });
+    })();
+  </script>
+</body>
+</html>
