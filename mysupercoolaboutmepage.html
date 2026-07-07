@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Redirecting...</title>
+</head>
+<body>
+	<h1>Redirecting...</h1>
+	<p id="status">Sending you to the page in <span id="countdown">5</span> seconds.</p>
+	<button id="goNow" type="button">Go now</button>
+
+	<div id="hiddenZone" hidden>
+		<a href="whoevenamianymore.html">...</a>
+	</div>
+
+	<script>
+		(function () {
+			const targetUrl = "https://techitall.straw.page";
+			const countdownEl = document.getElementById("countdown");
+			const goNowBtn = document.getElementById("goNow");
+			const hiddenZone = document.getElementById("hiddenZone");
+			const params = new URLSearchParams(window.location.search);
+			const debugValues = params.getAll("debug");
+			const forceRareMode = debugValues.includes("1");
+			const noAutoRedirectMode = debugValues.includes("2");
+			const rareMode = forceRareMode || Math.random() < 0.1;
+
+			if (rareMode && hiddenZone) {
+				hiddenZone.hidden = false;
+				hiddenZone.style.marginTop = "auto";
+				hiddenZone.style.paddingBottom = "18px";
+				hiddenZone.style.textAlign = "center";
+
+				document.body.style.display = "flex";
+				document.body.style.flexDirection = "column";
+				document.body.style.alignItems = "flex-start";
+				document.body.style.minHeight = "240vh";
+				document.body.style.background = "linear-gradient(to bottom, #ffffff 0%, #ffffff 62vh, #ffe8e8 88vh, #8b0000 115vh, #8b0000 100%)";
+			}
+
+			if (goNowBtn) {
+				goNowBtn.style.width = "auto";
+				goNowBtn.style.display = "inline-block";
+			}
+
+			let secondsLeft = 5;
+			let tick = null;
+			const redirectNow = () => {
+				window.location.href = targetUrl;
+			};
+
+			if (noAutoRedirectMode) {
+				if (countdownEl) {
+					countdownEl.textContent = "∞";
+				}
+			} else {
+				tick = setInterval(() => {
+					secondsLeft -= 1;
+					if (countdownEl) {
+						countdownEl.textContent = String(Math.max(secondsLeft, 0));
+					}
+
+					if (secondsLeft <= 0) {
+						clearInterval(tick);
+						redirectNow();
+					}
+				}, 1000);
+			}
+
+			if (goNowBtn) {
+				goNowBtn.addEventListener("click", () => {
+					if (tick !== null) {
+						clearInterval(tick);
+					}
+					redirectNow();
+				});
+			}
+		})();
+	</script>
+</body>
+</html>
