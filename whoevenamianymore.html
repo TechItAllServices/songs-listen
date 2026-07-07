@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+	<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+	<title>hahaha</title>
+	<style>
+		@font-face {
+			font-family: "ReenieBeanie";
+			src: url("fonts/ReenieBeanie-Regular.ttf") format("truetype");
+			font-display: swap;
+		}
+
+		@font-face {
+			font-family: "OMORI_GAME";
+			src: url("fonts/OMORI_GAME.ttf") format("truetype");
+			font-display: swap;
+		}
+
+		:root {
+			--bg: #000000;
+			--text-default: #ffffff;
+			--text-alert: #ff1f1f;
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			background: var(--bg);
+			overflow: hidden;
+		}
+
+		html.endless-mode,
+		body.endless-mode {
+			overflow-y: auto;
+			overflow-x: hidden;
+			height: auto;
+		}
+
+		body {
+			display: grid;
+			place-items: center;
+			position: relative;
+			color: var(--text-default);
+			text-align: center;
+		}
+
+		.text {
+			max-width: min(92vw, 1100px);
+			font-size: clamp(2rem, 6vw, 5rem);
+			line-height: 1.12;
+			padding: 1rem;
+			z-index: 2;
+			word-break: break-word;
+			display: none;
+		}
+
+		.text.mode-three-text {
+			max-width: min(96vw, 1800px);
+			max-height: 92vh;
+			overflow-y: auto;
+			font-size: clamp(0.95rem, 2.1vw, 2.1rem);
+			line-height: 1.16;
+			overflow-wrap: anywhere;
+			word-break: break-word;
+			padding: 1rem 1.1rem;
+		}
+
+		.unlock-bar {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: min(96vw, 1300px);
+			padding: 1rem;
+			text-align: center;
+			font-size: clamp(2rem, 6vw, 5rem);
+			line-height: 1;
+			background: rgba(0, 0, 0, 0.78);
+			border: 2px solid currentColor;
+			letter-spacing: 0.08em;
+			z-index: 4;
+			user-select: none;
+			pointer-events: none;
+		}
+
+		body.endless-mode {
+			display: block;
+			min-height: 100vh;
+		}
+
+		.endless-text {
+			position: relative;
+			z-index: 2;
+			width: min(96vw, 1800px);
+			margin: 0 auto;
+			padding: 2.5rem 1rem 4rem;
+		}
+
+		.endless-preface {
+			font-family: "OMORI_GAME", sans-serif;
+			font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+			line-height: 1.2;
+			color: #ff1f1f;
+			text-align: center;
+			margin: 0 0 0.8rem;
+		}
+
+		.endless-line {
+			font-family: "OMORI_GAME", sans-serif;
+			font-size: clamp(1.3rem, 2.6vw, 2.3rem);
+			line-height: 1.25;
+			color: #ff1f1f;
+			text-align: left;
+			white-space: nowrap;
+			overflow: visible;
+			width: 180vw;
+			margin: 0.25rem 0 0.25rem -40vw;
+		}
+
+		.stretched-intro {
+			display: block;
+			width: 100%;
+			max-width: 100%;
+			margin: 0 auto;
+			text-align: justify;
+			text-align-last: center;
+			line-height: 1.08;
+			padding: 0 0.4rem;
+		}
+
+		.vhs-overlay {
+			position: fixed;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			opacity: 0.5;
+			pointer-events: none;
+			z-index: 1;
+		}
+
+		.mode-three-hint {
+			position: fixed;
+			left: 50%;
+			bottom: 1rem;
+			transform: translateX(-50%);
+			color: #ff1f1f;
+			font-family: "OMORI_GAME", sans-serif;
+			font-size: clamp(1rem, 2.6vw, 1.7rem);
+			letter-spacing: 0.04em;
+			z-index: 4;
+			opacity: 0;
+			transition: opacity 180ms ease;
+			pointer-events: none;
+		}
+
+		.mode-three-hint.visible {
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="mainText" class="text"></div>
+	<audio id="bgAudio" loop preload="auto" playsinline></audio>
+
+	<script>
+		const endlessPhrase = "The end is never the end";
+		let endlessModeStarted = false;
+		let modeThreeReadyToTransition = false;
+		let modeThreeHintEl = null;
+
+		const scenarios = [
+			{
+				chance: 70,
+				text: "Who even am I anymore?",
+				font: "ReenieBeanie",
+				color: "#ffffff",
+				audio: "assets/liquid-smooth/NORMAL-YTDown.com_YouTube_Liquid-Smooth-Lumatone-Version_Media_toLrnNkxqow_009_128k.mp3",
+				overlay: false
+			},
+			{
+				chance: 29,
+				text: "Why am I still here? What is wrong with me?",
+				font: "OMORI_GAME",
+				color: "#ffffff",
+				audio: "assets/liquid-smooth/SLOW-YTDown.com_YouTube_Liquid-Smooth-Lumatone-Version-Slowed_Media_bNDqh5RP_98_007_128k.mp3",
+				overlay: false
+			},
+			{
+				chance: 1,
+				text: "Is that... that person on that, 'status page' even me? That person, well maybe they seem cool. But they aren't me. I hate myself, I wish I was someone different. Why can't I give up on life? I want to end it all. I want to die. I want to disappear. I hate this, but at the same time I... I'm too tired to do it? I can't do anthing, beyond useless. I can't even do that. I can't even end it all. I can't even do that. I can't even do that. I can't even do that. I can't even do that. I can't even do that. I can't even do that. I can't even-",
+				font: "OMORI_GAME",
+				color: "#ff1f1f",
+				audio: "assets/liquid-smooth/SUPERSLOW-YTDown.com_YouTube_Liquid-Smooth-Lumatone-Version-super-slo_Media_585oEzFO43w_009_128k.mp3",
+				overlay: true
+			}
+		];
+
+		function pickWeightedScenario() {
+			const roll = Math.random() * 100;
+			let running = 0;
+
+			for (const option of scenarios) {
+				running += option.chance;
+				if (roll < running) {
+					return option;
+				}
+			}
+
+			return scenarios[0];
+		}
+
+		function pickScenarioFromDebugParam() {
+			const params = new URLSearchParams(window.location.search);
+			const rawMode = params.get("mode") || params.get("debug");
+			if (!rawMode) {
+				return null;
+			}
+
+			const parsed = Number.parseInt(rawMode, 10);
+			if (Number.isNaN(parsed)) {
+				return null;
+			}
+
+			if (parsed >= 1 && parsed <= scenarios.length) {
+				return scenarios[parsed - 1];
+			}
+
+			return null;
+		}
+
+		function appendEndlessLines(container, amount) {
+			for (let i = 0; i < amount; i += 1) {
+				const line = document.createElement("p");
+				line.className = "endless-line";
+				line.textContent = `${endlessPhrase} `.repeat(24).trim();
+				container.appendChild(line);
+			}
+		}
+
+		function startEndlessMode() {
+			if (endlessModeStarted || !modeThreeReadyToTransition) {
+				return;
+			}
+
+			endlessModeStarted = true;
+			modeThreeReadyToTransition = false;
+			window.removeEventListener("click", startEndlessMode);
+			if (modeThreeHintEl) {
+				modeThreeHintEl.remove();
+				modeThreeHintEl = null;
+			}
+
+			const textEl = document.getElementById("mainText");
+			textEl.remove();
+
+			document.documentElement.classList.add("endless-mode");
+			document.body.classList.add("endless-mode");
+
+			const endlessContainer = document.createElement("div");
+			endlessContainer.className = "endless-text";
+
+			const endlessPreface = document.createElement("p");
+			endlessPreface.className = "endless-preface";
+			endlessPreface.textContent = "I'm starting to think that";
+			endlessContainer.appendChild(endlessPreface);
+
+			document.body.appendChild(endlessContainer);
+
+			const ensureMoreText = () => {
+				const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 450;
+				if (nearBottom) {
+					appendEndlessLines(endlessContainer, 30);
+				}
+			};
+
+			appendEndlessLines(endlessContainer, 90);
+			while (document.documentElement.scrollHeight <= window.innerHeight + 120) {
+				appendEndlessLines(endlessContainer, 20);
+			}
+
+			window.addEventListener("scroll", ensureMoreText, { passive: true });
+			window.addEventListener("resize", ensureMoreText);
+			ensureMoreText();
+		}
+
+		function setupModeThreeTransition() {
+			modeThreeReadyToTransition = false;
+			window.removeEventListener("click", startEndlessMode);
+
+			if (modeThreeHintEl) {
+				modeThreeHintEl.remove();
+			}
+
+			modeThreeHintEl = document.createElement("div");
+			modeThreeHintEl.className = "mode-three-hint";
+			modeThreeHintEl.textContent = "";
+			document.body.appendChild(modeThreeHintEl);
+
+			document.body.style.cursor = "default";
+
+			setTimeout(() => {
+				modeThreeHintEl?.classList.add("visible");
+
+				const message = "...click?";
+				let index = 0;
+				const typeTick = () => {
+					if (!modeThreeHintEl) {
+						return;
+					}
+
+					index += 1;
+					modeThreeHintEl.textContent = message.slice(0, index);
+
+					if (index >= message.length) {
+						modeThreeReadyToTransition = true;
+						document.body.style.cursor = "pointer";
+						window.addEventListener("click", startEndlessMode);
+						return;
+					}
+
+					setTimeout(typeTick, 140);
+				};
+
+				setTimeout(typeTick, 120);
+			}, 5000);
+		}
+
+		function startAudioOnLoad(audioEl) {
+			let started = false;
+
+			const tryStart = () => {
+				if (started) {
+					return;
+				}
+
+				audioEl.muted = true;
+				const playPromise = audioEl.play();
+
+				if (!playPromise || typeof playPromise.then !== "function") {
+					return;
+				}
+
+				playPromise.then(() => {
+					started = true;
+					setTimeout(() => {
+						audioEl.muted = false;
+					}, 0);
+				}).catch(() => {
+					// Browser policy may still block autoplay with sound.
+				});
+			};
+
+			tryStart();
+			window.addEventListener("load", tryStart, { once: true });
+			window.addEventListener("pageshow", tryStart, { once: true });
+			document.addEventListener("visibilitychange", () => {
+				if (document.visibilityState === "visible") {
+					tryStart();
+				}
+			});
+		}
+
+		function escapeHtml(text) {
+			return text
+				.replaceAll("&", "&amp;")
+				.replaceAll("<", "&lt;")
+				.replaceAll(">", "&gt;")
+				.replaceAll('"', "&quot;")
+				.replaceAll("'", "&#39;");
+		}
+
+		function renderModeThreeText(fullText) {
+			const marker = "That person, well maybe they seem cool.";
+			const markerIndex = fullText.indexOf(marker);
+
+			if (markerIndex === -1) {
+				return escapeHtml(fullText);
+			}
+
+			const intro = fullText.slice(0, markerIndex).trim();
+			const rest = fullText.slice(markerIndex).trim();
+			return `<span class="stretched-intro">${escapeHtml(intro)}</span> ${escapeHtml(rest)}`;
+		}
+
+		function applyScenario(option) {
+			const textEl = document.getElementById("mainText");
+			const audioEl = document.getElementById("bgAudio");
+
+			textEl.style.display = "block";
+			textEl.textContent = "";
+			textEl.classList.remove("mode-three-text");
+			textEl.style.fontFamily = `"${option.font}", sans-serif`;
+			textEl.style.color = option.color;
+
+			if (option.overlay) {
+				textEl.classList.add("mode-three-text");
+				textEl.innerHTML = renderModeThreeText(option.text);
+			} else {
+				textEl.textContent = option.text;
+			}
+
+			if (option.overlay) {
+				const overlay = document.createElement("img");
+				overlay.className = "vhs-overlay";
+				overlay.src = "assets/vhsfilter.gif";
+				overlay.alt = "";
+				document.body.appendChild(overlay);
+				setupModeThreeTransition();
+			}
+
+			audioEl.src = option.audio;
+			audioEl.autoplay = true;
+			audioEl.loop = true;
+			audioEl.load();
+			startAudioOnLoad(audioEl);
+
+			const playPromise = audioEl.play();
+			if (playPromise && typeof playPromise.catch === "function") {
+				playPromise.catch(() => {
+					// If autoplay is blocked, retry on the first user interaction.
+					const resume = () => {
+						audioEl.play().catch(() => {});
+						window.removeEventListener("click", resume);
+						window.removeEventListener("keydown", resume);
+						window.removeEventListener("touchstart", resume);
+					};
+
+					window.addEventListener("click", resume, { once: true });
+					window.addEventListener("keydown", resume, { once: true });
+					window.addEventListener("touchstart", resume, { once: true });
+				});
+			}
+		}
+
+		function showClickGate(option) {
+			const gate = document.createElement("div");
+			gate.className = "unlock-bar";
+			gate.textContent = "CLICK";
+			gate.style.fontFamily = `"${option.font}", sans-serif`;
+			gate.style.color = option.color;
+			document.body.appendChild(gate);
+
+			const unlock = () => {
+				gate.remove();
+				applyScenario(option);
+				window.removeEventListener("click", unlock);
+				window.removeEventListener("keydown", unlock);
+				window.removeEventListener("touchstart", unlock);
+			};
+
+			window.addEventListener("click", unlock, { once: true });
+			window.addEventListener("keydown", unlock, { once: true });
+			window.addEventListener("touchstart", unlock, { once: true });
+		}
+
+		const selectedScenario = pickScenarioFromDebugParam() || pickWeightedScenario();
+		showClickGate(selectedScenario);
+	</script>
+</body>
+</html>
